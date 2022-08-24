@@ -24,11 +24,16 @@ jobs:
         working-directory: conformance-suite
       - name: clean up any generated config json
         run: rm -f .gitlab-ci/local-provider-oidcc.plan
+        working-directory: conformance-suite
       - name: fetch latest images
         run: docker compose -f ../conformance-suite/docker-compose-localtest.yml pull
+        working-directory: conformance-suite
       - name: build local images
         run: docker compose -f ../conformance-suite/docker-compose-localtest.yml build
+        working-directory: conformance-suite
       - name: rebuild local containers
         run: docker compose -f ../conformance-suite/docker-compose-localtest.yml up --no-start
+        working-directory: conformance-suite
       - name: run test
         run: docker compose -f ../conformance-suite/docker-compose-localtest.yml run test
+        working-directory: conformance-suite
