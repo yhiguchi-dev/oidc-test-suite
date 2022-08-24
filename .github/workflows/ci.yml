@@ -12,4 +12,4 @@ jobs:
       - name: clone project
         run: |
           git clone https://gitlab.com/openid/conformance-suite.git
-          ls -ltar
+          ls -ltar conformance-suite
