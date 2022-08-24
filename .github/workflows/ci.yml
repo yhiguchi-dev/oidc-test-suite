@@ -27,8 +27,8 @@ jobs:
       - name: fetch latest images
         run: docker compose -f ../conformance-suite/docker-compose-localtest.yml pull
       - name: build local images
-        run: docker-compose -f ../conformance-suite/docker-compose-localtest.yml build
+        run: docker compose -f ../conformance-suite/docker-compose-localtest.yml build
       - name: rebuild local containers
-        run: docker-compose -f ../conformance-suite/docker-compose-localtest.yml up --no-start
+        run: docker compose -f ../conformance-suite/docker-compose-localtest.yml up --no-start
       - name: run test
-        run: docker-compose -f ../conformance-suite/docker-compose-localtest.yml run test
+        run: docker compose -f ../conformance-suite/docker-compose-localtest.yml run test
