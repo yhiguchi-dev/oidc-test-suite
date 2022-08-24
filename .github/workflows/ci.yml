@@ -10,4 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: clone project
-        run: git clone https://gitlab.com/openid/conformance-suite.git
+        run: |
+          git clone https://gitlab.com/openid/conformance-suite.git
+          ls -ltar
