@@ -44,5 +44,5 @@ jobs:
         run: docker compose -f docker-compose-dev.yml up -d
         working-directory: conformance-suite
       - name: run test
-        run: .gitlab-ci/run-tests.sh --ciba-tests-only
+        run: .gitlab-ci/run-tests.sh --local-provider-tests
         working-directory: conformance-suite
