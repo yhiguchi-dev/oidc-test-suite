@@ -19,21 +19,28 @@ jobs:
           java-version: '11'
           distribution: 'zulu'
           cache: 'maven'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+      - name: Install dependencies
+        run: |
+          pip install httpx
       - name: build
-        run: mvn clean package
-        working-directory: conformance-suite
-      - name: clean up any generated config json
-        run: rm -f .gitlab-ci/local-provider-oidcc.plan
+        run: |
+          mvn clean package
+          rm -f .gitlab-ci/local-provider-oidcc.plan
         working-directory: conformance-suite
       - name: fetch latest images
-        run: docker compose -f ../conformance-suite/docker-compose-localtest.yml pull
+        run: docker compose -f docker-compose.yml pull
         working-directory: conformance-suite
       - name: build local images
-        run: docker compose -f ../conformance-suite/docker-compose-localtest.yml build
+        run: docker compose -f docker-compose.yml build
         working-directory: conformance-suite
       - name: rebuild local containers
-        run: docker compose -f ../conformance-suite/docker-compose-localtest.yml up --no-start
+        run: docker compose -f docker-compose.yml up --no-start
         working-directory: conformance-suite
       - name: run test
-        run: docker compose -f ../conformance-suite/docker-compose-localtest.yml run test
+        run: .gitlab-ci/run-tests.sh --ciba-tests-only
         working-directory: conformance-suite
