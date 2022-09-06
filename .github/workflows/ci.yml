@@ -8,7 +8,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      CONFORMANCE_SERVER: http://localhost:8443/
+      CONFORMANCE_SERVER: https://localhost:8443/
       CONFORMANCE_DEV_MODE: 1
     steps:
       - uses: actions/checkout@v3
