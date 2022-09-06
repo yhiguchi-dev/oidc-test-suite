@@ -35,13 +35,13 @@ jobs:
           rm -f .gitlab-ci/local-provider-oidcc.plan
         working-directory: conformance-suite
       - name: fetch latest images
-        run: docker compose -f docker-compose.yml pull
+        run: docker compose -f docker-compose-dev.yml pull
         working-directory: conformance-suite
       - name: build local images
-        run: docker compose -f docker-compose.yml build
+        run: docker compose -f docker-compose-dev.yml build
         working-directory: conformance-suite
       - name: rebuild local containers
-        run: docker compose -f docker-compose.yml up -d
+        run: docker compose -f docker-compose-dev.yml up -d
         working-directory: conformance-suite
       - name: run test
         run: .gitlab-ci/run-tests.sh --ciba-tests-only
