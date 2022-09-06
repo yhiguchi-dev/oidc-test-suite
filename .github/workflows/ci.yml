@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CONFORMANCE_SERVER: https://localhost:8443/
-      CONFORMANCE_DEV_MODE: 1
     steps:
       - uses: actions/checkout@v3
       - name: clone project
@@ -41,7 +40,7 @@ jobs:
         run: docker compose -f docker-compose.yml build
         working-directory: conformance-suite
       - name: rebuild local containers
-        run: docker compose -f docker-compose.yml up --no-start
+        run: docker compose -f docker-compose.yml up -d
         working-directory: conformance-suite
       - name: run test
         run: .gitlab-ci/run-tests.sh --ciba-tests-only
