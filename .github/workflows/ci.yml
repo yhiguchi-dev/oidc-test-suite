@@ -7,6 +7,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      CONFORMANCE_SERVER: https://localhost:8443/
     steps:
       - uses: actions/checkout@v3
       - name: clone project
