@@ -10,14 +10,14 @@ jobs:
     env:
       CONFORMANCE_SERVER: https://staging.certification.openid.net/
       CONFORMANCE_TOKEN: ${{secrets.CONFORMANCE_TOKEN}}
-      TEST: $(echo "test")
     steps:
       - uses: actions/checkout@v3
       - name: clone project
         run: |
           git clone https://gitlab.com/openid/conformance-suite.git
           ls -ltar conformance-suite
-          echo $TEST
+          TEST=test
+          echo "TEST=$TEST" >> ${GITHUB_ENV}
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
