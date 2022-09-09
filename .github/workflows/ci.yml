@@ -10,18 +10,14 @@ jobs:
     env:
       CONFORMANCE_SERVER: https://staging.certification.openid.net/
       CONFORMANCE_TOKEN: ${{secrets.CONFORMANCE_TOKEN}}
+      TEST: $(echo "test")
     steps:
       - uses: actions/checkout@v3
       - name: clone project
         run: |
           git clone https://gitlab.com/openid/conformance-suite.git
           ls -ltar conformance-suite
-      - name: set up JDK 11
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'zulu'
-          cache: 'maven'
+          echo $TEST
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -29,20 +25,6 @@ jobs:
       - name: Install dependencies
         run: |
           pip install httpx
-      # - name: build
-      #   run: |
-      #     mvn clean package
-      #     rm -f .gitlab-ci/local-provider-oidcc.plan
-      #   working-directory: conformance-suite
-      # - name: fetch latest images
-      #   run: docker compose -f docker-compose-dev.yml pull
-      #   working-directory: conformance-suite
-      # - name: build local images
-      #   run: docker compose -f docker-compose-dev.yml build
-      #   working-directory: conformance-suite
-      # - name: rebuild local containers
-      #   run: docker compose -f docker-compose-dev.yml up -d
-      #   working-directory: conformance-suite
       - name: run test
         run: .gitlab-ci/run-tests.sh --local-provider-tests
         working-directory: conformance-suite
